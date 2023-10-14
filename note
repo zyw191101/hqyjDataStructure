@@ -1,4 +1,5 @@
-
+p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM
+//密钥，可能尾部有.
 malloc 创建节点
 指针接收创建的节点
 pnew用于保存malloc创建的新节点的地址

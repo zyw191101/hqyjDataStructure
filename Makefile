@@ -1,8 +1,13 @@
-CC=gcc
-OBJS +=linkedListMain.o linkedListSub.o
-OBJS +=linkedListSub.h
-main:$(OBJS)
-	$(CC)  $^ -o $@
-%.o:%.c
-	$(CC) -c $^ -o $@
+CC = gcc
+CFLAGS = -c
 
+SRCS := $(wildcard *.c)
+OBJS := $(SRCS:.c=.o)
+
+main: $(OBJS)
+	$(CC) $^ -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@
+.PHONY:clean
+clean:
+	rm -f $(OBJS)
