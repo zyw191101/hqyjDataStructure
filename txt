@@ -1,0 +1,10 @@
+
+malloc 创建节点
+指针接收创建的节点
+pnew用于保存malloc创建的新节点的地址
+p_tail-next=pnew相连
+ptail=pnew
+
+
+
+
