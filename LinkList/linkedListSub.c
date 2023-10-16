@@ -127,6 +127,31 @@ int sigleDel(STU *head, int delNum)
     del_t = NULL; // 再次初始化一下
     // return 0;
 }
+/*
+删除单链表指定数据*/
+int sigleDel(STU *head, int data){
+    STU *pdel=NULL;
+    if (isEmptyLinkList(head))
+    {
+        printf("sigleDel err\n");
+        return -1;
+    }
+    while (1)
+    {
+        head=head->next;
+        if (head->score==data)
+        {
+        pdel =head;
+        head->next=pdel->next->next;
+        printf("单链表指定数据删除成功");
+        free(pdel);
+     
+        
+        }
+        
+    }
+    
+}
 
 /*
 清空链表
@@ -222,6 +247,7 @@ int delDataLinkList(STU *head, float data)
 
 /*
 将头节点与当前链表断开
+invert
 */
 int invertLinkList(STU *head)
 {

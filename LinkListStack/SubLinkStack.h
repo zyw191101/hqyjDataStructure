@@ -11,19 +11,19 @@ typedef struct SubLinkStack
 }LSTK;
 
 /* 创建空的链式栈 */
-LSTK *createLinkStack(){
-
-    LSTK *ptop=(LSTK *)malloc(sizeof(LSTK));
-    ptop->next=NULL;
-    return ptop;
-}
+LSTK *createLinkStack();
 
 /* 链式栈入栈 */
 void pushLinkStack(LSTK **ptop,DATATYPE data);
 
+/* 链式栈出栈 */
+DATATYPE popLinkStack(LSTK **ptop);
+
 /* 查看栈顶元素 */
 DATATYPE topDataLinkStack(LSTK **ptop);
 
+/* 判空 */
+int ifEmpLinkStack(LSTK *ptop);
 
 
 
