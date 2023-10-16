@@ -1,10 +1,11 @@
 #ifndef N
 #define N
-
+#define datatype int
+#define MAXSIZE 10
 // 创建顺序栈结构体
 typedef struct subSeqStack
 {
-    int data[10];
+    datatype data[MAXSIZE];
     int top;
 } SEQSTACK;
 
@@ -13,13 +14,13 @@ SEQSTACK *createSeqStack();
 // 2判空
 int isEmpSeqStack(SEQSTACK *p);
 // 3判满
-int isFullSeqstack(SEQSTACK *p);
+int isFullSeqStack(SEQSTACK *p);
 // 4出栈（删除数据）
 void popSeqStack(SEQSTACK *p);
 // 5入栈（添加数据）
-void pushSeqStack(SEQSTACK *p, int data);
+void pushSeqStack(SEQSTACK *p, datatype data);
 /*   6查看栈顶数据 */
-int searchSeqStack(SEQSTACK *p);
+datatype searchSeqStack(SEQSTACK *p);
 /*   7求长度 */
 int acmSeqStack(SEQSTACK *p);
 /*  8清空 */
