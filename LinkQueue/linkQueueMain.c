@@ -23,5 +23,7 @@ int main(int argc, char const *argv[])
     
      len = acmLinkQueue(plinkQueue);
     printf("len:%d", len);
+        printf("gitigitgititi");
+            printf("gitigitgititi");
     return 0;
 }
