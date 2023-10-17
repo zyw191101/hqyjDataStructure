@@ -25,7 +25,20 @@ POINT* createDoubleLinkList();
 /* 入队 */
 int inDoubleLinkList(POINT *p, int post, DATATYPE data);
 
+/* 遍历双向链表 */
+int showDoubleLinkList(POINT *p);
 
+/* 删除双向链表指定位置的数据 */
+int delPostDoubleLinklist(POINT *p, int post);
+
+/* 查找指定数据出现的位置 */
+int searchDataDoubleLinkList(POINT *p, DATATYPE data);
+
+/* 修改指定位置的数据 */
+int changeDataDoubleLinkList(POINT *p, int post, DATATYPE data);
+
+/* 删除双向链表中的指定数据 */
+int delDataDoubleLinkList(POINT *p, DATATYPE data);
 
 
 
