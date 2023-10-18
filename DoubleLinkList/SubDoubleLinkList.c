@@ -29,7 +29,7 @@ POINT *createDoubleLinkList()
 int inDoubleLinkList(POINT *p, int post, DATATYPE data)
 {
 	if (post < 0 || post > p->len)
-	{ // post可以等于len吗？todo
+	{ // post=len,是尾插，所以这里只要大于就可以了。finished。
 		printf("post指定错误");
 		return -1;
 	}
@@ -40,7 +40,10 @@ int inDoubleLinkList(POINT *p, int post, DATATYPE data)
 		perror("insertIntoDoubleLinkList pnew malloc err");
 		return -1;
 	}
+	//初始化新节点
 	nodep->data = data;
+	nodep->next=NULL;
+	nodep->prior=NULL;
 	// 2.创建指针，指向要插入的数据节点的地址。
 	DLL *temp = NULL;
 	// 连接
@@ -48,9 +51,10 @@ int inDoubleLinkList(POINT *p, int post, DATATYPE data)
 	// printf("p->len:%d\n", p->len);
 	if (post == p->len)
 	{ // 尾插
+		//在双向链表中将新节点的 prior 指针指向直接前驱节点。
+		//将直接前驱节点的 next 指针指向新节点。
 		p->tail->next = nodep;
 		nodep->prior = p->tail;
-		nodep->next = NULL;
 		p->tail = nodep;
 		printf("尾插%d\n", nodep->data);
 	}
@@ -61,25 +65,30 @@ int inDoubleLinkList(POINT *p, int post, DATATYPE data)
 			// 通过循环找到插入的数据节点
 			temp = p->head;
 			for (int i = 0; i <= post; i++)
-			{ // 要不要等于post
+			{ //无所谓前半部分，相等则后半部分不等，
+			//i这里是for中变量，全局会不会有影响todo
 				temp = temp->next;
 			}
 			temp->prior->next = nodep;
 			nodep->prior = temp->prior;
-			nodep->next = temp->prior;
-			printf("前部插%d\n", nodep->data);
+			nodep->next = temp;
+			temp->prior=nodep;
+			printf("前半部插%d\n", nodep->data);
 		}
 		else
 		{
 			// 通过循环找到插入的数据节点
 			temp = p->tail;
-			for (int i = p->len; i >= post; i--)
-			{ // 要不要等于post
+			for (int i = p->len-1; i > post; i--)
+			{ 
 				temp = temp->prior;
 			}
+			//前面双连接
 			temp->prior->next = nodep;
 			nodep->prior = temp->prior;
-			nodep->next = temp->prior;
+			//后面双连接
+			nodep->next = temp;
+			temp->prior=nodep;
 			printf("前部插%d\n", nodep->data);
 			printf("后半部分插入 \n");
 		}
@@ -110,8 +119,9 @@ int showDoubleLinkList(POINT *p)
 	printf("\n");
 	printf("反向遍历：");
 	temp = p->tail;
-	while (temp->prior != p->head)
-	{ // p->tail是有数据的，所以先打印，再移动
+	while (temp->prior != NULL)
+	{ //p->head,指向的是一个数据节点。p在这里代替了头节点的作用.
+		// p->tail是有数据的，所以先打印，再移动
 		printf("%d", temp->data);
 		temp = temp->prior;
 	}
@@ -179,7 +189,7 @@ int searchDataDoubleLinkList(POINT *p, DATATYPE data)
 		post++;
 	}
 }
-/* 修改指定位置的数据 */
+/* 修改指定位置post的数据data */
 int changeDataDoubleLinkList(POINT *p, int post, DATATYPE data)
 {
 	// 1.容错判断
@@ -200,14 +210,14 @@ int changeDataDoubleLinkList(POINT *p, int post, DATATYPE data)
 	{
 		temp = p->tail;
 		for (int i = p->len - 1; i > post; i--)
-			// todo 为什么要-1，
+			// todo 为什么要-1：day55已解决，finished
 			temp = temp->prior;
 	}
 	// 3.修改数据
 	temp->data = data;
 	return 0;
 }
-/* 删除双向链表中的指定数据 */
+/* 删除双向链表中的指定数据data */
 int delDataDoubleLinkList(POINT *p, DATATYPE data)
 {
 	// 1.定义一个指针指向头的下一个节点，相当于遍历无头列表
@@ -240,4 +250,6 @@ int delDataDoubleLinkList(POINT *p, DATATYPE data)
 			temp = temp->next;
 		}
 	}
+	return 	p->len--;
+
 }
