@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "linkedlistsub.h": "c",
-        "subseqstack.h": "c"
+        "subseqstack.h": "c",
+        "sublinkstack.h": "c"
     }
 }
